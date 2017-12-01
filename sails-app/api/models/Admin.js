@@ -16,7 +16,8 @@
        },
        email: {
          type: 'string',
-         required: true
+         required: true,
+         unique: true
        }
      }
 };
