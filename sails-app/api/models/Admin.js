@@ -5,10 +5,18 @@
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
  */
 
-module.exports = {
+ module.exports = {
 
-  attributes: {
+     schema: true,
 
-  }
+     attributes: {
+       name: {
+         type: 'string',
+         required: true
+       },
+       email: {
+         type: 'string',
+         required: true
+       }
+     }
 };
-
