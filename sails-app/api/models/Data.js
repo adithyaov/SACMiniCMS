@@ -15,6 +15,10 @@
        enum: ['html', 'markdown', 'member', 'siteLink'],
        defaultsTo: 'html'
      },
+     targetView: {
+       type: 'string',
+       required: true
+     }
      content: {
        type: 'json',
        required: true
