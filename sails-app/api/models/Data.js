@@ -18,7 +18,7 @@
      targetView: {
        type: 'string',
        required: true
-     }
+     },
      content: {
        type: 'json',
        required: true
