@@ -1,0 +1,11 @@
+{
+  "home": { 
+    "about" : ["P1", "P2"],
+    "directorQuote" : "Paragraph",
+    "directorName" : "String",
+    "imageBig" : "Url",
+    "imageLeft" : "Url",
+    "imageMiddle" : "Url",
+    "imageRight" : "Url"
+    }
+}
