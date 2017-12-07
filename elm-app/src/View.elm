@@ -4,6 +4,7 @@ import Html exposing (Html, div, text)
 import Models exposing (Model)
 import Msgs exposing (Msg)
 import Page.Home
+import Page.Members
 
 view : Model -> Html Msg
 view model =
@@ -16,6 +17,9 @@ page model =
     case model.route of
         Models.HomeRoute ->
             Page.Home.view model.home
+
+        Models.MembersRoute ->
+            Page.Members.view model.members
 
         Models.ActivityRoute activity ->
             Page.Home.view model.home

@@ -7,5 +7,23 @@
     "imageLeft" : "Url",
     "imageMiddle" : "Url",
     "imageRight" : "Url"
+    },
+  "members": [
+    {
+      "name": "Name",
+      "type": "faculty",
+      "email": "a@b.com",
+      "contact": "+91 7277388228",
+      "image": "url",
+      "position": "Director"
+    },
+    {
+      "name": "Name2",
+      "type": "student",
+      "email": "a@b.com",
+      "contact": "+91 7277388228",
+      "image": "url",
+      "position": "Student"
     }
+  ]
 }

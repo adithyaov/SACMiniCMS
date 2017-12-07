@@ -5,6 +5,7 @@ import RemoteData exposing (WebData)
 type alias Model =
     { route : Route
     , home : WebData (HomeModel)
+    , members : WebData (MembersModel)
     }
 
 type alias Post =
@@ -24,7 +25,19 @@ type alias HomeModel =
     , imageRight : Url
     }
 
+type alias Member =
+    { name : String 
+    , type_ : String
+    , email : String
+    , contact : String
+    , image : String
+    , position : String
+    }
+
+type alias MembersModel = List Member
+
 initialHomeModel = RemoteData.Loading
+initialMembersModel = RemoteData.Loading
 
 type alias Paragraph = String
 type alias Url = String
@@ -33,10 +46,12 @@ initialModel : Route -> Model
 initialModel route =
     { route = route
     , home = initialHomeModel
+    , members = initialMembersModel
     }
 
 type Route
     = HomeRoute
+    | MembersRoute
     | ActivityRoute String
     | SubCouncilRoute String
     | NotFoundRoute
