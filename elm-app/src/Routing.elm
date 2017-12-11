@@ -11,8 +11,7 @@ matchers =
         , map MembersRoute (s "members")
         , map ActivityRoute (s "activities" </> string)
         , map SubCouncilRoute (s "sub-council" </> string)
-        , map HomeRoute (s "feedback")
-        , map HomeRoute (s "links")
+        , map FeedbackRoute (s "feedback")
         ]
 
 

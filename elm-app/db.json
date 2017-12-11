@@ -1,20 +1,30 @@
 {
-  "home": { 
-    "about" : ["P1", "P2"],
-    "directorQuote" : "Paragraph",
-    "directorName" : "String",
-    "imageBig" : "Url",
-    "imageLeft" : "Url",
-    "imageMiddle" : "Url",
-    "imageRight" : "Url"
-    },
+  "home": {
+    "content": [
+      {
+        "title": "About",
+        "content": "Hula hoops",
+        "link": "",
+        "image": ""
+      },
+      {
+        "title": "Functions",
+        "content": "Hula hupidi hoops",
+        "link": "",
+        "image": ""
+      }
+    ],
+    "directorQuote": "Paragraph",
+    "directorName": "String",
+    "imageBig": ""
+  },
   "members": [
     {
       "name": "Name",
       "type": "faculty",
       "email": "a@b.com",
       "contact": "+91 7277388228",
-      "image": "url",
+      "image": "http://turing.iitpkd.ac.in/test/web/wp-content/uploads/2017/01/kls_new-150x150.jpg",
       "position": "Director"
     },
     {
@@ -24,6 +34,107 @@
       "contact": "+91 7277388228",
       "image": "url",
       "position": "Student"
+    }
+  ],
+  "activities-technical": [
+    {
+      "title": "US NASA Space Program",
+      "content": "The Program is costly",
+      "link": "lala",
+      "image": ""
+    },
+    {
+      "title": "US NASA Space Program",
+      "content": "The Program is costly",
+      "link": "lala",
+      "image": ""
+    },
+    {
+      "title": "US NASA Space Program",
+      "content": "The Program is costly",
+      "link": "lala",
+      "image": ""
+    }
+  ],
+  "sub-council-sports": {
+    "image": "lalala",
+    "content": [
+      {
+        "title": "US NASA Space Program",
+        "content": "The Program is costly",
+        "link": "",
+        "image": ""
+      },
+      {
+        "title": "US NASA Space Program",
+        "content": "The Program is costly",
+        "link": "",
+        "image": ""
+      },
+      {
+        "title": "US NASA Space Program",
+        "content": "The Program is costly",
+        "link": "",
+        "image": ""
+      }
+    ],
+    "team": [
+      {
+        "name": "Name",
+        "type": "faculty",
+        "email": "a@b.com",
+        "contact": "+91 7277388228",
+        "image": "url",
+        "position": "Director"
+      },
+      {
+        "name": "Name2",
+        "type": "student",
+        "email": "a@b.com",
+        "contact": "+91 7277388228",
+        "image": "url",
+        "position": "Student"
+      }
+    ]
+  },
+  "footer": [
+    {
+      "title": "Quick links",
+      "content": [
+        "lala land"
+      ]
+    },
+    {
+      "title": "Quick links",
+      "content": [
+        "lala land"
+      ]
+    },
+    {
+      "title": "Quick links",
+      "content": [
+        "lala land"
+      ]
+    }
+  ],
+  "feedback": [
+    {
+      "id": 1,
+      "name": "lala",
+      "email": "ema@l.com",
+      "message": "Lala lupe"
+    },
+    {
+      "name": "",
+      "email": "",
+      "message": "",
+      "id": 2
+    },
+    {
+      "name": "ddd",
+      "email": "ddd",
+      "message": "ddd",
+      "id": 3
     }
   ]
 }

@@ -1,17 +1,20 @@
 module Page.Home exposing (..)
-import Models exposing (HomeModel, Model)
+import Models exposing (HomeModel, Model, Post, FooterModel)
 import Html exposing (Html, text, div, img, h2, p, cite, br)
 import Html.Attributes exposing (class, href, src, style)
 import Page.Header as Header
+import Page.Footer as Footer
 import RemoteData exposing (WebData)
 import Msgs exposing (Msg)
+import Utils
 
-view : WebData (HomeModel) -> Html Msg
-view response = 
+view : WebData (FooterModel) -> WebData (HomeModel) -> Html Msg
+view footer response = 
     div [ class "bg-white clearfix" ]
-        [ div [ style [("min-width", "700px")], class "mx3 mt3 bg-white rounded" ]
+        [ div [ style [("min-width", "700px")] ]
             [ Header.view
-            , maybeList response ] ]
+            , maybeList response
+            , Footer.view footer ] ]
 
 maybeList : WebData (HomeModel) -> Html Msg
 maybeList response =
@@ -30,20 +33,16 @@ maybeList response =
 
 
 
-viewSuccess : HomeModel -> Html msg
+viewSuccess : HomeModel -> Html Msg
 viewSuccess model = 
     div [] 
-        [ div [ style [("height", "300px")], class "mx3 bg-black rounded overflow-hidden" ] []
-        , div [ class "mt1 mx3 p2" ]
-            [ div [ class "h2 bold mb2" ] [ text "About us." ]
-            , div []
-                (List.map (\para -> div [ class "my1" ] [ text para ]) model.about) ]
-        , div [ class "mt1 mx3 p2" ]
+        [ div [ style [("background-image", "url(" ++ model.imageBig ++ ")")], class "bg-red overflow-hidden" ]
+            [ div [ class "center p4 m4 h1 bold caps white" ] [ text "SAC IIT PKD" ] ]
+        , div [ class "mt3 px4" ]
+            [ div [] (Utils.viewPosts model.content) ]
+        , div [ class "px4 py2" ]
             [ div [ style [("background-color", "#f9f9f0")], class "p2 border-left border-black" ]
-                [ div [ class "h3 bold" ] [ text model.directorQuote ]
-                , div [ class "clearfix" ] [ cite [ class "right h4" ] [ text model.directorName ] ] ] ]
-        , div [ class "mx3 mt2 clearfix" ] 
-            [ div [ class "p1 col col-4" ] [ div [ style [("height", "200px")], class "bg-black rounded overflow-hidden" ] [] ]
-            , div [ class "p1 col col-4" ] [ div [ style [("height", "200px")], class "bg-black rounded overflow-hidden" ] [] ]
-            , div [ class "p1 col col-4" ] [ div [ style [("height", "200px")], class "bg-black rounded overflow-hidden" ] [] ] ]
-        , div [ class "mx3 mb3 mt2 p2" ] [ text "copyright 2018 IIT Palakkad" ] ]
+                [ div [ class "h3" ] [ text model.directorQuote ]
+                , div [ class "clearfix" ] [ cite [ class "right h4" ] [ text model.directorName ] ] ] ] ]
+
+
