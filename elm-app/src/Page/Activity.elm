@@ -52,7 +52,7 @@ viewPost post =
         [ div [ style [("height", "200px"), ("background-image", "url(" ++ post.image ++ ")")], class "bg-gray bg-cover bg-center mb1" ]
             [ div [ class "px2 py1 left bg-black" ] [ a [ href post.link, class "h6 text-decoration-none yellow bold caps" ] [ text post.link ] ] ]
         , div [ class "bold underline" ] [ text post.title ]
-        , div [] [ text post.content ] ]
+        , div [] (List.map (\paragraph -> (div [] [ text paragraph ])) post.content) ]
 
 inNav : Html Msg
 inNav = 

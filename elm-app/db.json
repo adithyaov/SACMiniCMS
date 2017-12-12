@@ -3,15 +3,11 @@
     "content": [
       {
         "title": "About",
-        "content": "Hula hoops",
-        "link": "",
-        "image": ""
+        "content": ["Hula hoops"]
       },
       {
         "title": "Functions",
-        "content": "Hula hupidi hoops",
-        "link": "",
-        "image": ""
+        "content": ["Hula hupidi hoops"]
       }
     ],
     "directorQuote": "Paragraph",
@@ -39,19 +35,19 @@
   "activities-technical": [
     {
       "title": "US NASA Space Program",
-      "content": "The Program is costly",
+      "content": ["The Program is costly"],
       "link": "lala",
       "image": ""
     },
     {
       "title": "US NASA Space Program",
-      "content": "The Program is costly",
+      "content": ["The Program is costly"],
       "link": "lala",
       "image": ""
     },
     {
       "title": "US NASA Space Program",
-      "content": "The Program is costly",
+      "content": ["The Program is costly"],
       "link": "lala",
       "image": ""
     }
@@ -61,21 +57,15 @@
     "content": [
       {
         "title": "US NASA Space Program",
-        "content": "The Program is costly",
-        "link": "",
-        "image": ""
+        "content": ["The Program is costly"]
       },
       {
         "title": "US NASA Space Program",
-        "content": "The Program is costly",
-        "link": "",
-        "image": ""
+        "content": ["The Program is costly"]
       },
       {
         "title": "US NASA Space Program",
-        "content": "The Program is costly",
-        "link": "",
-        "image": ""
+        "content": ["The Program is costly"]
       }
     ],
     "team": [
@@ -99,22 +89,16 @@
   },
   "footer": [
     {
-      "title": "Quick links",
-      "content": [
-        "lala land"
-      ]
+      "title": "US NASA Space Program",
+      "content": ["The Program is costly"]
     },
     {
-      "title": "Quick links",
-      "content": [
-        "lala land"
-      ]
+      "title": "US NASA Space Program",
+      "content": ["The Program is costly"]
     },
     {
-      "title": "Quick links",
-      "content": [
-        "lala land"
-      ]
+      "title": "US NASA Space Program",
+      "content": ["The Program is costly"]
     }
   ],
   "feedback": [

@@ -14,7 +14,7 @@ type alias Model =
 
 type alias Post =
     { title : String
-    , content : String
+    , content : List String
     , link : String
     , image : String
     }
@@ -41,11 +41,6 @@ type alias SubCouncilModel =
     , team : List Member
     }
 
-type alias FooterPost =
-    { title : String
-    , content : List String
-    }
-
 type alias FeedbackFormModel =
     { name : String
     , email : String
@@ -63,7 +58,7 @@ type alias FeedbackModel =
     }
 
 
-type alias FooterModel = List FooterPost
+type alias FooterModel = List Post
 type alias MembersModel = List Member
 type alias ActivitiesModel = List Post
 

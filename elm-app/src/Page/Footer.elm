@@ -2,7 +2,7 @@ module Page.Footer exposing (..)
 
 import Html exposing (Html, div, text, a, ul, li)
 import Html.Attributes exposing (class, href)
-import Models exposing (FooterPost, FooterModel)
+import Models exposing (Post, FooterModel)
 import RemoteData exposing (WebData)
 
 view : WebData (FooterModel) -> Html msg
@@ -34,7 +34,7 @@ viewSuccess cols =
     div [ class "clearfix" ] (viewCols cols)
 
 
-viewCol : FooterPost -> Html msg
+viewCol : Post -> Html msg
 viewCol col = 
     div [ class "left mr4" ]
         [ div [ class "bold h5 caps" ] [ text col.title ]

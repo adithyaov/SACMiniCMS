@@ -30,4 +30,4 @@ viewPost : Post -> Html Msg
 viewPost post =
     div [ class "mb3" ]
         [ div [ class "caps h5 bold" ] [ text post.title ]
-        , div [] [ text post.content ] ]
+        , div [] (List.map (\paragraph -> div [] [ text paragraph ]) post.content) ]

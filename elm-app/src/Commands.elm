@@ -2,8 +2,8 @@ module Commands exposing (..)
 
 import Http
 import Json.Decode as Decode
-import Json.Decode.Pipeline exposing (decode, required)
-import Models exposing (FeedbackResponseModel, HomeModel, MembersModel, FeedbackFormModel, Member, Post, SubCouncilModel, FooterPost, FooterModel)
+import Json.Decode.Pipeline exposing (decode, required, optional)
+import Models exposing (FeedbackResponseModel, HomeModel, MembersModel, FeedbackFormModel, Member, Post, SubCouncilModel, FooterModel)
 import Msgs exposing (Msg)
 
 import RemoteData
@@ -73,9 +73,9 @@ postDataDecoder : Decode.Decoder Post
 postDataDecoder =
     decode Post
         |> required "title" Decode.string
-        |> required "content" Decode.string
-        |> required "link" Decode.string
-        |> required "image" Decode.string
+        |> required "content" (Decode.list Decode.string)
+        |> optional "link" Decode.string ""
+        |> optional "image" Decode.string ""
 
 
 subCouncilDataUrl : String -> String
@@ -102,21 +102,9 @@ footerDataUrl =
 
 fetchFooterData : Cmd Msg
 fetchFooterData =
-    Http.get footerDataUrl footerDataDecoder
+    Http.get footerDataUrl postsDataDecoder
         |> RemoteData.sendRequest
         |> Cmd.map Msgs.OnFetchFooterData
-
-footerDataDecoder : Decode.Decoder FooterModel
-footerDataDecoder =
-    Decode.list footerColDecoder
-
-
-footerColDecoder : Decode.Decoder FooterPost
-footerColDecoder =
-    decode FooterPost
-        |> required "title" Decode.string
-        |> required "content" (Decode.list Decode.string)
-
 
 saveFeedbackUrl : String
 saveFeedbackUrl =
