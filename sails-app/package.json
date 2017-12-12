@@ -20,7 +20,7 @@
     "grunt-sync": "0.5.2",
     "include-all": "^1.0.0",
     "rc": "1.0.1",
-    "sails": "~0.12.13",
+    "sails": "~0.12.14",
     "sails-disk": "~0.10.9"
   },
   "scripts": {
@@ -30,8 +30,8 @@
   "main": "app.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/altair/sails-app.git"
+    "url": "git://github.com/adithya/sails-app.git"
   },
-  "author": "altair",
+  "author": "adithya",
   "license": ""
 }
