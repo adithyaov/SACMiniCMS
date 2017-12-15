@@ -3,7 +3,7 @@ module Commands exposing (..)
 import Http
 import Json.Decode as Decode
 import Json.Decode.Pipeline exposing (decode, required, optional)
-import Models exposing (FeedbackResponseModel, HomeModel, MembersModel, FeedbackFormModel, Member, Post, SubCouncilModel, FooterModel)
+import Models exposing (BasicResponseModel, HomeModel, MembersModel, FeedbackFormModel, Member, Post, SubCouncilModel, FooterModel)
 import Msgs exposing (Msg)
 
 import RemoteData
@@ -53,6 +53,7 @@ memberDataDecoder =
         |> required "contact" Decode.string
         |> required "image" Decode.string
         |> required "position" Decode.string
+        |> optional "id" Decode.int 0               -- ------------------------------------------------- Change
 
 
 activitiesDataUrl : String -> String
@@ -76,6 +77,8 @@ postDataDecoder =
         |> required "content" (Decode.list Decode.string)
         |> optional "link" Decode.string ""
         |> optional "image" Decode.string ""
+        |> optional "position" Decode.float 0.0
+        |> optional "id" Decode.int 0               -- ------------------------------------------------- Change
 
 
 subCouncilDataUrl : String -> String
@@ -111,11 +114,11 @@ saveFeedbackUrl =
     "http://www.mocky.io/v2/5a2dcbb7320000e4376fa8ce"
 
 
-feedbackRequest : FeedbackFormModel -> Http.Request FeedbackResponseModel
+feedbackRequest : FeedbackFormModel -> Http.Request BasicResponseModel
 feedbackRequest feedback =
     Http.request
         { body = feedbackEncoder feedback |> Http.jsonBody
-        , expect = Http.expectJson feedbackResponseDecoder
+        , expect = Http.expectJson basicResponseDecoder
         , headers = []
         , method = "POST"
         , timeout = Nothing
@@ -123,9 +126,9 @@ feedbackRequest feedback =
         , withCredentials = False
         }
 
-feedbackResponseDecoder : Decode.Decoder FeedbackResponseModel
-feedbackResponseDecoder =
-    decode FeedbackResponseModel
+basicResponseDecoder : Decode.Decoder BasicResponseModel
+basicResponseDecoder =
+    decode BasicResponseModel
         |> required "status" Decode.bool
         |> required "message" Decode.string
 
@@ -143,4 +146,5 @@ feedbackEncoder feedback =
 sendFeedbackCmd : FeedbackFormModel -> Cmd Msg
 sendFeedbackCmd feedback =
     feedbackRequest feedback
-        |> Http.send (\x -> Msgs.OnFeedback (Msgs.OnFetchFeedbackResponse x))
+        |> Http.send Msgs.OnFetchFeedbackResponse
+        |> Cmd.map Msgs.OnFeedback

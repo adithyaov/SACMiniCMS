@@ -34,6 +34,27 @@ update msg model =
         Msgs.OnFeedback feedbackMsg ->
             updateFeedback feedbackMsg model
 
+        Msgs.OnEditor editMsg ->
+            updateEdit editMsg model
+
+
+updateEdit : Msgs.EditMsgs -> Model -> ( Model, Cmd Msg )
+updateEdit msg model =
+    let
+        editModel = model.edit
+    in
+        case msg of
+            Msgs.ChangeRoute route ->
+                ( changeEditRoute route model, Cmd.none )
+
+
+changeEditRoute : Models.EditRoute -> Model -> Model
+changeEditRoute route model =
+    let
+        editModel = model.edit            
+    in
+        { model | edit = { editModel | route = route } }
+
 
 updateFeedback : Msgs.FeedbackMsgs -> Model -> ( Model, Cmd Msg )
 updateFeedback msg model = 

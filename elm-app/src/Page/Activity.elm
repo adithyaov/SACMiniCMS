@@ -11,15 +11,15 @@ import Utils
 view : String -> WebData (FooterModel) -> WebData (ActivitiesModel) -> Html Msg
 view activity footer response = 
     div [ class "bg-white clearfix" ]
-        [ div [ style [("min-width", "700px")] ]
+        [ div []
             [ Header.view
             , inNav
             , div [ class "center caps px4 mt2 h5 bold" ] [ text (activity ++ " activities") ]
-            , maybeList response 
+            , mabeyResponse response 
             , Footer.view footer ] ]
 
-maybeList : WebData (ActivitiesModel) -> Html Msg
-maybeList response =
+mabeyResponse : WebData (ActivitiesModel) -> Html Msg
+mabeyResponse response =
     case response of
         RemoteData.NotAsked ->
             div [ class "m3 p2 border" ] [ text "Not Requested" ]

@@ -11,13 +11,13 @@ import Utils
 view : WebData (FooterModel) -> WebData (HomeModel) -> Html Msg
 view footer response = 
     div [ class "bg-white clearfix" ]
-        [ div [ style [("min-width", "700px")] ]
+        [ div []
             [ Header.view
-            , maybeList response
+            , mabeyResponse response
             , Footer.view footer ] ]
 
-maybeList : WebData (HomeModel) -> Html Msg
-maybeList response =
+mabeyResponse : WebData (HomeModel) -> Html Msg
+mabeyResponse response =
     case response of
         RemoteData.NotAsked ->
             div [ class "m3 p2 border" ] [ text "Not Requested" ]

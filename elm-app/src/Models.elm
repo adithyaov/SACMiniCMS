@@ -10,6 +10,8 @@ type alias Model =
     , council : WebData (SubCouncilModel)
     , footer : WebData (FooterModel)
     , feedback : FeedbackModel
+    , display : DisplayMode
+    , edit : EditModel
     }
 
 type alias Post =
@@ -17,6 +19,8 @@ type alias Post =
     , content : List String
     , link : String
     , image : String
+    , position : Float
+    , id : Int
     }
 
 type alias HomeModel = 
@@ -33,6 +37,7 @@ type alias Member =
     , contact : String
     , image : String
     , position : String
+    , id : Int
     }
 
 type alias SubCouncilModel =
@@ -47,14 +52,14 @@ type alias FeedbackFormModel =
     , message : String 
     }
 
-type alias FeedbackResponseModel =
+type alias BasicResponseModel =
     { status : Bool 
     , message : String
     }
 
 type alias FeedbackModel =
     { form : FeedbackFormModel
-    , response : Maybe (Result Http.Error FeedbackResponseModel)
+    , response : Maybe (Result Http.Error BasicResponseModel)
     }
 
 
@@ -69,7 +74,7 @@ initialActivitiesModel = RemoteData.Loading
 initialSubCouncilModel = RemoteData.Loading
 initialFooterModel = RemoteData.Loading
 initialFeedbackModel = FeedbackModel (FeedbackFormModel "" "" "") (Nothing)
-
+initialDisplayMode = EditMode 
 
 type alias Paragraph = String
 type alias Url = String
@@ -83,6 +88,8 @@ initialModel route =
     , council = initialSubCouncilModel
     , footer = initialFooterModel
     , feedback = initialFeedbackModel
+    , display = initialDisplayMode
+    , edit = initiaEditModel
     }
 
 type Route
@@ -92,3 +99,25 @@ type Route
     | SubCouncilRoute String
     | FeedbackRoute
     | NotFoundRoute
+
+type DisplayMode
+    = EditMode
+    | ViewMode
+
+type EditRoute
+    = EditPostRoute
+    | EditMemberRoute
+
+type alias EditModel =
+    { route : EditRoute
+    , newPost : Post
+    , newMember : Member
+    , response : Maybe BasicResponseModel
+    }
+
+initiaEditModel =
+    { route = EditPostRoute
+    , newPost = Post "" [] "" "" 0.0 -1
+    , newMember = Member "" "" "" "" "" "" -1
+    , response = Nothing
+    }

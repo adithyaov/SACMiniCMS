@@ -8,13 +8,13 @@ import RemoteData exposing (WebData)
 view : WebData (FooterModel) -> Html msg
 view response =
     div [ class "clearfix py3 px4 white bg-black mt4" ]
-        [ (maybeList response)
+        [ (mabeyResponse response)
         , div [ class "right yellow" ] 
             [ div [ class "h5 caps bold" ] [ text "Copyright 2017 IIT Palakkad" ]
             , div [ class "right caps" ] [ text  "iitpkd.ac.in" ] ] ]
 
-maybeList : WebData (FooterModel) -> Html msg
-maybeList response =
+mabeyResponse : WebData (FooterModel) -> Html msg
+mabeyResponse response =
     case response of
         RemoteData.NotAsked ->
             div [ class "left m3 p2 border" ] [ text "Not Requested" ]

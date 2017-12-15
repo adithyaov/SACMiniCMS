@@ -11,13 +11,13 @@ import Utils
 view : String -> WebData (FooterModel) -> WebData (SubCouncilModel) -> Html Msg
 view council footer response = 
     div [ class "bg-white clearfix" ]
-        [ div [ style [("min-width", "700px")] ]
+        [ div []
             [ Header.view
-            , maybeList council response
+            , mabeyResponse council response
             , Footer.view footer ] ]
 
-maybeList : String -> WebData (SubCouncilModel) -> Html Msg
-maybeList council response =
+mabeyResponse : String -> WebData (SubCouncilModel) -> Html Msg
+mabeyResponse council response =
     case response of
         RemoteData.NotAsked ->
             div [ class "m3 p2 border" ] [ text "Not Requested" ]

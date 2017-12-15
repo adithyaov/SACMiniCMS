@@ -1,18 +1,28 @@
 module View exposing (..)
 
 import Html exposing (Html, div, text)
-import Models exposing (Model)
+import Html.Attributes exposing (class, style)
+import Models exposing (Model, DisplayMode(..))
 import Msgs exposing (Msg)
 import Page.Home
 import Page.Members
 import Page.Activity
 import Page.SubCouncil
 import Page.Feedback
+import Page.Edit
 
 view : Model -> Html Msg
 view model =
-    div []
-        [ page model ]
+    case model.display of
+        ViewMode ->
+            div [ style [("min-width", "700px")] ]
+                [ page model ]
+        EditMode ->
+            div []
+                [ div [ class "fixed top-0 left-0 overflow-auto", style [("width", "calc(100% - 450px)"), ("height", "100%")] ] 
+                    [ page model ]
+                , div [ class "fixed top-0 right-0 overflow-auto", style [("width", "450px"), ("height", "100%")] ]
+                    [ editor model ] ]
 
 
 page : Model -> Html Msg
@@ -35,6 +45,11 @@ page model =
 
         Models.NotFoundRoute ->
             notFoundView
+
+
+editor : Model -> Html Msg
+editor model =
+    Page.Edit.view model
 
 
 notFoundView : Html msg

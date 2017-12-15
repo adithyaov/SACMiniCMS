@@ -2,7 +2,7 @@ module Msgs exposing (..)
 
 import Navigation exposing (Location)
 import RemoteData exposing (WebData)
-import Models exposing (FeedbackResponseModel, HomeModel, Model, MembersModel, Post, SubCouncilModel, FooterModel)
+import Models exposing (BasicResponseModel, HomeModel, Model, MembersModel, Post, SubCouncilModel, FooterModel, EditRoute)
 
 import Http
 
@@ -14,10 +14,14 @@ type Msg
     | OnFetchSubCouncilData (WebData (SubCouncilModel))
     | OnFetchFooterData (WebData (FooterModel))
     | OnFeedback FeedbackMsgs
+    | OnEditor EditMsgs
 
 type FeedbackMsgs
-    = OnFetchFeedbackResponse (Result Http.Error FeedbackResponseModel)
+    = OnFetchFeedbackResponse (Result Http.Error BasicResponseModel)
     | OnInputName String
     | OnInputEmail String
     | OnInputMessage String
     | OnSendFeedback
+
+type EditMsgs
+    = ChangeRoute EditRoute

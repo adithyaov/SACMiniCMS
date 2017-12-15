@@ -1,14 +1,16 @@
 var path = require("path");
 
+var compile = 'src'
+
 module.exports = {
   entry: {
     app: [
-      './src/index.js'
+      './' + compile + '/index.js'
     ]
   },
 
   output: {
-    path: path.resolve(__dirname + '/dist-app'),
+    path: path.resolve(__dirname + '/dist-' + compile),
     filename: '[name].js',
   },
 

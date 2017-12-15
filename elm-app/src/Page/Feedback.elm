@@ -1,5 +1,5 @@
 module Page.Feedback exposing (..)
-import Models exposing (FooterModel, FeedbackModel, FeedbackResponseModel)
+import Models exposing (FooterModel, FeedbackModel, BasicResponseModel)
 import Html exposing (Html, text, div, img, h2, p, cite, br, input, textarea, label)
 import Html.Attributes exposing (class, href, src, style, type_, placeholder, value, required)
 import Html.Events exposing (onClick, onInput)
@@ -13,7 +13,7 @@ import Http
 view : WebData (FooterModel) -> FeedbackModel -> Html Msg
 view footer feedback = 
     div [ class "bg-white clearfix" ]
-        [ div [ style [("min-width", "700px")] ]
+        [ div []
             [ Header.view
             , div [ class "px4 py2 mx-auto", style [("max-width", "800px")] ]
                 [ div [ class "h5 bold caps" ] [ text "Feedback" ]
@@ -37,7 +37,7 @@ viewForm =
         , input [ type_ "submit", value "Submit", class "btn btn-primary", onClick (Msgs.OnFeedback Msgs.OnSendFeedback) ] [] ]
 
 
-displayForm : Maybe (Result Http.Error FeedbackResponseModel) -> Html Msg
+displayForm : Maybe (Result Http.Error BasicResponseModel) -> Html Msg
 displayForm feedback =
     let
         display feedback =
