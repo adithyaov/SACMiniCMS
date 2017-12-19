@@ -17,13 +17,20 @@ module.exports = {
 			directorName = await Static.findOne({key: 'home.directorName'})
 			directorQuote = await Static.findOne({key: 'home.directorQuote'})
 			imageBig = await Static.findOne({key: 'home.imageBig'})
-			content = await Post.find({page: 'home'})
+			content = await Post.find({
+				where: {page: 'home'},
+				limit: 10,
+				sort: 'position ASC'
+			})
 
 			returnObj = {
 				directorName: directorName.value,
 				directorQuote: directorQuote.value,
 				imageBig: imageBig.value,
-				content: content
+				content: content,
+				directorNameId: directorName.id,
+				directorQuoteId: directorQuote.id,
+				imageBigId: imageBig.id,
 			}
 
 			console.log(returnObj)
@@ -38,7 +45,7 @@ module.exports = {
 		try {
 			var members;
 
-			members = await Members.find({page: 'members'})
+			members = await Member.find({page: 'members'})
 
 			returnObj = members
 
@@ -58,12 +65,17 @@ module.exports = {
 			councilType = req.params.id
 			image = await Static.findOne({key: 'council.' + councilType + '.image'})
 			team = await Member.find({page: 'council.' + councilType})
-			content = await Post.find({page: 'council.' + councilType})
+			content = await Post.find({
+				where: {page: 'council.' + councilType},
+				limit: 10,
+				sort: 'position ASC'
+			})
 
 			returnObj = {
 				image: image.value,
 				content: content,
-				team: team
+				team: team,
+				imageId: image.id
 			}
 
 			res.json(returnObj)
@@ -77,7 +89,12 @@ module.exports = {
 			var activitiesType;
 
 			activitiesType = req.params.id
-			activities = await Post.find({page: 'activities.' + activitiesType})
+			activities = await Post.find({
+				where: {page: 'activities.' + activitiesType},
+				limit: 10,
+				sort: 'createdAt DESC'
+			})
+
 
 			returnObj = activities
 
@@ -85,8 +102,21 @@ module.exports = {
 		} catch (e) {
 			res.json({error: e})
 		}
-	}
+	},
 
+	'footer': async (req, res) => {
+		try {
+			var footer
+
+			footer = await Post.find({page: 'footer'})
+
+			returnObj = footer
+
+			res.json(returnObj)
+		} catch (e) {
+			res.json({error: e})
+		}
+	}
 
 };
 

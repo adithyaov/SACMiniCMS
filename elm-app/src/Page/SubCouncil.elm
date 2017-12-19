@@ -36,7 +36,7 @@ mabeyResponse council response =
 viewSuccess : String -> SubCouncilModel -> Html Msg
 viewSuccess council model = 
     div [] 
-        [ div [ style [("background-image", "url(" ++ model.image ++ ")")], class "bg-blue overflow-hidden" ]
+        [ div [ style [("background-image", "url(" ++ model.image ++ ")")], class "bg-blue overflow-hidden bg-cover bg-center" ]
             [ miniNav
             , div [ class "white pb4 pt1 px4 m4 center h1 bold caps" ] [ text (council ++ " Council") ] ]
         , div [ class "mt3 px4" ]

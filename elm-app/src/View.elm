@@ -20,10 +20,16 @@ view model =
         EditMode ->
             div []
                 [ div [ class "fixed top-0 left-0 overflow-auto", style [("width", "calc(100% - 450px)"), ("height", "100%")] ] 
-                    [ page model ]
+                    [ notificationBox (model.edit.alert)
+                    , page model ]
                 , div [ class "fixed top-0 right-0 overflow-auto", style [("width", "450px"), ("height", "100%")] ]
                     [ editor model ] ]
 
+
+notificationBox alert =
+    div [ class "fixed p2 m2 overflow-auto black bg-yellow", style [("max-height", "100px"), ("max-width", "600px")] ] 
+        [ div [ class "bold h5 caps" ] [ text "Notification box" ]
+        , div [ class "mt1" ] [ text alert ] ]
 
 page : Model -> Html Msg
 page model =

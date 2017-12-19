@@ -21,6 +21,7 @@ type alias Post =
     , image : String
     , position : Float
     , id : Int
+    , page : String
     }
 
 type alias HomeModel = 
@@ -28,6 +29,9 @@ type alias HomeModel =
     , directorQuote : Paragraph
     , directorName : String
     , imageBig : Url
+    , directorQuoteId : Int
+    , directorNameId : Int
+    , imageBigId : Int
     }
 
 type alias Member =
@@ -38,6 +42,7 @@ type alias Member =
     , image : String
     , position : String
     , id : Int
+    , page : String
     }
 
 type alias SubCouncilModel =
@@ -62,6 +67,10 @@ type alias FeedbackModel =
     , response : Maybe (Result Http.Error BasicResponseModel)
     }
 
+type alias StaticModel =
+    { key : String
+    , value : String
+    }
 
 type alias FooterModel = List Post
 type alias MembersModel = List Member
@@ -107,17 +116,20 @@ type DisplayMode
 type EditRoute
     = EditPostRoute
     | EditMemberRoute
+    | EditStaticRoute
 
 type alias EditModel =
     { route : EditRoute
     , newPost : Post
     , newMember : Member
-    , response : Maybe BasicResponseModel
+    , response : Maybe (Result Http.Error BasicResponseModel)
+    , alert : String
     }
 
 initiaEditModel =
     { route = EditPostRoute
-    , newPost = Post "" [] "" "" 0.0 -1
-    , newMember = Member "" "" "" "" "" "" -1
+    , newPost = Post "" [] "" "" 10 -1 "home"
+    , newMember = Member "" "student" "" "" "" "" -1 "members"
     , response = Nothing
+    , alert = "Notifications displayed here :-)"
     }

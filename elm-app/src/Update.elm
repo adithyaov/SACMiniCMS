@@ -1,9 +1,9 @@
 module Update exposing (..)
 
 import Msgs exposing (Msg)
-import Models exposing (Model)
+import Models exposing (Model, Post, Member)
 import Routing exposing (parseLocation)
-import Commands exposing (fetchHomeData, fetchMembersData, fetchActivitiesData, fetchSubCouncilData, sendFeedbackCmd)
+import Commands exposing (..)
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -17,19 +17,24 @@ update msg model =
                 ( { model | route = newRoute }, commandOn newRoute )
 
         Msgs.OnFetchHomeData response ->
-            ( { model | home = response }, Cmd.none )
+            ( model
+                |> setHomeResponse response, Cmd.none )
 
         Msgs.OnFetchMembersData response ->
-            ( { model | members = response }, Cmd.none )
+            ( model
+                |> setMembersResponse response, Cmd.none )
 
         Msgs.OnFetchActivitiesData response ->
-            ( { model | activities = response }, Cmd.none )
+            ( model
+                |> setActivitiesResponse response, Cmd.none )
 
         Msgs.OnFetchSubCouncilData response ->
-            ( { model | council = response }, Cmd.none )
+            ( model
+                |> setCouncilResponse response, Cmd.none )
 
         Msgs.OnFetchFooterData response ->
-            ( { model | footer = response }, Cmd.none )
+            ( model
+                |> setFooterResponse response, Cmd.none )
 
         Msgs.OnFeedback feedbackMsg ->
             updateFeedback feedbackMsg model
@@ -42,10 +47,61 @@ updateEdit : Msgs.EditMsgs -> Model -> ( Model, Cmd Msg )
 updateEdit msg model =
     let
         editModel = model.edit
+        newPost = model.edit.newPost
+        newMember = model.edit.newMember
     in
         case msg of
             Msgs.ChangeRoute route ->
                 ( changeEditRoute route model, Cmd.none )
+            Msgs.OnFormPost post ->
+                ( model
+                    |> setNewPost post editModel, Cmd.none )
+            Msgs.OnFormMember member ->
+                ( model
+                    |> setNewMember member editModel, Cmd.none )
+            Msgs.OnFetchEditResponse response ->
+                ( model 
+                    |> editResponse response,  Cmd.batch [ commandOn model.route, fetchFooterData ] )
+
+            Msgs.SubmitPostForm ->
+                ( model
+                    |> changeAlertMsg "Loading..." editModel, postCmd model )
+
+            Msgs.SubmitStatic key value ->
+                ( model
+                    |> changeAlertMsg "Loading..." editModel, staticCmd key value model )
+
+            Msgs.SubmitMemberForm ->
+                ( model
+                    |> changeAlertMsg "Loading..." editModel, memberCmd model )
+
+            Msgs.Reload ->
+                ( model
+                    |> changeAlertMsg "Loading..." editModel, Cmd.batch [ commandOn model.route, fetchFooterData ] )
+
+changeAlertMsg message editModel model =
+    { model | edit = { editModel | alert = message } }
+
+setNewPost post editModel model =
+    { model | edit = { editModel | newPost = post } }
+
+setNewMember member editModel model = 
+    { model | edit = { editModel | newMember = member } }
+
+setHomeResponse response model =
+    { model | home = response }
+
+setMembersResponse response model =
+    { model | members = response }
+
+setActivitiesResponse response model =
+    { model | activities = response }
+
+setCouncilResponse response model =
+    { model | council = response }
+
+setFooterResponse response model =
+    { model | footer = response }
 
 
 changeEditRoute : Models.EditRoute -> Model -> Model
@@ -54,6 +110,7 @@ changeEditRoute route model =
         editModel = model.edit            
     in
         { model | edit = { editModel | route = route } }
+
 
 
 updateFeedback : Msgs.FeedbackMsgs -> Model -> ( Model, Cmd Msg )
@@ -94,3 +151,25 @@ commandOn route =
         Models.ActivityRoute activity -> fetchActivitiesData activity
         Models.SubCouncilRoute council -> fetchSubCouncilData council
         _ -> Cmd.none
+
+
+
+editResponse : Msgs.EditResponse -> Model -> Model
+editResponse response model = 
+    case response of
+        Msgs.PostResponse x ->
+            onResult x model
+        Msgs.MemberResponse x ->
+            onResult x model
+        Msgs.StaticResponse x ->
+            onResult x model
+
+
+onResult httpResult model =
+    case httpResult of
+        Err e
+            -> model
+                |> changeAlertMsg ("[ERROR] -> " ++ (toString e)) (model.edit)
+        Ok r
+            -> model
+                |> changeAlertMsg "Successfully Added/Modified :-)" (model.edit)

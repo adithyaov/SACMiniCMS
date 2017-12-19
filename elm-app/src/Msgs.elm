@@ -2,7 +2,7 @@ module Msgs exposing (..)
 
 import Navigation exposing (Location)
 import RemoteData exposing (WebData)
-import Models exposing (BasicResponseModel, HomeModel, Model, MembersModel, Post, SubCouncilModel, FooterModel, EditRoute)
+import Models exposing (BasicResponseModel, HomeModel, Model, MembersModel, Post, SubCouncilModel, FooterModel, EditRoute, Member, Post)
 
 import Http
 
@@ -25,3 +25,15 @@ type FeedbackMsgs
 
 type EditMsgs
     = ChangeRoute EditRoute
+    | OnFormPost Post
+    | OnFormMember Member
+    | SubmitPostForm
+    | SubmitMemberForm
+    | SubmitStatic String String
+    | OnFetchEditResponse EditResponse
+    | Reload
+
+type EditResponse
+    = PostResponse (Result Http.Error Post)
+    | MemberResponse (Result Http.Error Member)
+    | StaticResponse (Result Http.Error BasicResponseModel)

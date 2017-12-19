@@ -36,7 +36,7 @@ mabeyResponse response =
 viewSuccess : HomeModel -> Html Msg
 viewSuccess model = 
     div [] 
-        [ div [ style [("background-image", "url(" ++ model.imageBig ++ ")")], class "bg-red overflow-hidden" ]
+        [ div [ style [("background-image", "url(" ++ model.imageBig ++ ")")], class "bg-red overflow-hidden bg-cover bg-center" ]
             [ div [ class "center p4 m4 h1 bold caps white" ] [ text "SAC IIT PKD" ] ]
         , div [ class "mt3 px4" ]
             [ div [] (Utils.viewPosts model.content) ]

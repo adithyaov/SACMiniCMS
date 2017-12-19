@@ -27,6 +27,11 @@ module.exports = {
     page: {
       type: 'string',
       required: true
+    },
+    position: {
+      type: 'float',
+      required: true,
+      defaultsTo: 10
     }
   }
 };
