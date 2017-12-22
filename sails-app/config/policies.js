@@ -26,7 +26,36 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
-  // '*': true,
+  '*': false,
+
+  MemberController: {
+    '*': 'sessionAuth',
+    find: true,
+  },
+
+  PostController: {
+    '*': 'sessionAuth',
+    find: true,
+  },
+
+  StaticController: {
+    '*': false,
+    find: true,
+    customUpdate: 'sessionAuth',
+  },
+
+  FeedbackController: {
+    '*': false,
+    customCreate: true
+  },
+
+  AuthController: {
+    '*': true
+  },
+
+  displayController: {
+    '*': true
+  },
 
   /***************************************************************************
   *                                                                          *

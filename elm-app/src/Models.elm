@@ -83,7 +83,7 @@ initialActivitiesModel = RemoteData.Loading
 initialSubCouncilModel = RemoteData.Loading
 initialFooterModel = RemoteData.Loading
 initialFeedbackModel = FeedbackModel (FeedbackFormModel "" "" "") (Nothing)
-initialDisplayMode = EditMode 
+initialDisplayMode = ViewMode 
 
 type alias Paragraph = String
 type alias Url = String
@@ -108,6 +108,7 @@ type Route
     | SubCouncilRoute String
     | FeedbackRoute
     | NotFoundRoute
+    | StartEditSession String
 
 type DisplayMode
     = EditMode

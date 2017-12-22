@@ -32,9 +32,8 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  // '/': {
-  //   view: 'homepage'
-  // }
+  '/auth/:token': 'AuthController.googleApi',
+  '/loginStatus': 'AuthController.loginStatus'
 
   /***************************************************************************
   *                                                                          *

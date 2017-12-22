@@ -15,6 +15,7 @@ type Msg
     | OnFetchFooterData (WebData (FooterModel))
     | OnFeedback FeedbackMsgs
     | OnEditor EditMsgs
+    | OnFetchAuthResponse (Result Http.Error BasicResponseModel)
 
 type FeedbackMsgs
     = OnFetchFeedbackResponse (Result Http.Error BasicResponseModel)

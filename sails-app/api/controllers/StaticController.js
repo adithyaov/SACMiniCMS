@@ -7,7 +7,7 @@
 
 module.exports = {
 
-	'customUpdate':  async (req, res) => {
+	'customUpdate': (req, res) => {
 		var key;
 		var value;
 		key = req.body.key

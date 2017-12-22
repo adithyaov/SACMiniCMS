@@ -60,9 +60,19 @@ memberDataDecoder =
         |> required "page" Decode.string
 
 
+
 activitiesDataUrl : String -> String
 activitiesDataUrl activity =
     "http://localhost:1337/display/activities/" ++ activity
+
+authUrl : String -> String
+authUrl token = 
+    "http://localhost:1337/auth/" ++ token
+
+fetchAuth : String -> Cmd Msg
+fetchAuth token =
+    Http.send Msgs.OnFetchAuthResponse (Http.get (authUrl token) basicResponseDecoder)
+
 
 fetchActivitiesData : String -> Cmd Msg
 fetchActivitiesData activity =
@@ -116,7 +126,7 @@ fetchFooterData =
 
 saveFeedbackUrl : String
 saveFeedbackUrl =
-    "http://www.mocky.io/v2/5a2dcbb7320000e4376fa8ce"
+    "http://localhost:1337/feedback/customCreate"
 
 
 

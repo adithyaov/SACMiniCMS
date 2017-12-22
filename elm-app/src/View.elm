@@ -49,6 +49,9 @@ page model =
         Models.FeedbackRoute ->
             Page.Feedback.view model.footer model.feedback
 
+        Models.StartEditSession token ->
+            Page.Home.view model.footer model.home
+
         Models.NotFoundRoute ->
             notFoundView
 

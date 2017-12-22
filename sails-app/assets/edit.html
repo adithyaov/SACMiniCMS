@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta name="google-signin-client_id" content="680003514575-bi52bp4vklcldhd50etorj6k0og6jvni.apps.googleusercontent.com">
+</head>
+<body style="font-family: arial">
+	<center style="padding: 50px;">
+		<h2>Admin Page</h2>
+		<div class="g-signin2" data-onsuccess="onSignIn"></div>
+		<div style="margin-top: 50px; text-align: left;">
+			<b>Notes: </b>
+			<ol>
+				<li>You will be entering an edit phase of SAC website</li>
+				<li>Your email will be recorded and logged</li>
+			</ol>
+		</div>
+	</center>
+</body>
+	<script type="text/javascript">
+		function onSignIn(googleUser) {
+			var id_token = googleUser.getAuthResponse().id_token;
+		    var auth2 = gapi.auth2.getAuthInstance();
+		    auth2.signOut().then(function () {
+		    	window.location.assign('http://localhost:1337/#edit/' + id_token)
+		    	console.log('User signed out.');
+		    });
+		}
+	</script>
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+</html>

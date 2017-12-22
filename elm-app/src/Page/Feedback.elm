@@ -26,13 +26,13 @@ viewForm : Html Msg
 viewForm =            
     div []
         [ div [] 
-            [ label [ class "label" ] [ text "name" ]
+            [ label [ class "label" ] [ text "name*" ]
             , input [ type_ "text", placeholder "eg. Luke Skywalker", class "input", required True, onInput (\x -> Msgs.OnFeedback (Msgs.OnInputName x)) ] [] ]
         , div [] 
-            [ label [ class "label" ] [ text "email" ]
+            [ label [ class "label" ] [ text "email*" ]
             , input [ type_ "email", placeholder "eg. luke@jedi.com", class "input", required True, onInput (\x -> Msgs.OnFeedback (Msgs.OnInputEmail x)) ] [] ]
         , div [] 
-            [ label [ class "label" ] [ text "message" ]
+            [ label [ class "label" ] [ text "message*" ]
             , textarea [ placeholder "May the force be with you :-)", class "input", style [("height", "120px")], onInput (\x -> Msgs.OnFeedback (Msgs.OnInputMessage x)) ] [] ]
         , input [ type_ "submit", value "Submit", class "btn btn-primary", onClick (Msgs.OnFeedback Msgs.OnSendFeedback) ] [] ]
 

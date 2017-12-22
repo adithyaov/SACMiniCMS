@@ -104,8 +104,7 @@ nav =
     ul [ class "list-reset" ]
         [ li [ class "inline-block mr2 underline", onClick (parseRoute Models.EditPostRoute), style [("cursor", "pointer")] ] [ text "Add Post" ]
         , li [ class "inline-block mr2 underline", onClick (parseRoute Models.EditMemberRoute), style [("cursor", "pointer")] ] [ text "Add Member" ]
-        , li [ class "inline-block mr2 underline", onClick (parseRoute Models.EditStaticRoute), style [("cursor", "pointer")] ] [ text "Set Static" ]
-        , li [ class "inline-block mr2 underline", style [("cursor", "pointer")] ] [ text "Instructions" ] ]
+        , li [ class "inline-block mr2 underline", onClick (parseRoute Models.EditStaticRoute), style [("cursor", "pointer")] ] [ text "Set Static" ] ]
 
 displayWhat : Models.EditModel -> Html Msg
 displayWhat editModel =

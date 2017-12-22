@@ -42,6 +42,21 @@ update msg model =
         Msgs.OnEditor editMsg ->
             updateEdit editMsg model
 
+        Msgs.OnFetchAuthResponse response ->
+            ( editModeStatus response model, Cmd.none )
+
+
+editModeStatus response model =
+    case response of
+        Err e ->
+            { model | display = Models.ViewMode }
+        Ok r ->
+            if r.status == True then
+                { model | display = Models.EditMode }
+            else
+                { model | display = Models.ViewMode }
+
+
 
 updateEdit : Msgs.EditMsgs -> Model -> ( Model, Cmd Msg )
 updateEdit msg model =
@@ -150,6 +165,7 @@ commandOn route =
         Models.HomeRoute -> fetchHomeData
         Models.ActivityRoute activity -> fetchActivitiesData activity
         Models.SubCouncilRoute council -> fetchSubCouncilData council
+        Models.StartEditSession token -> Cmd.batch [ fetchHomeData, fetchFooterData, fetchAuth token ]
         _ -> Cmd.none
 
 

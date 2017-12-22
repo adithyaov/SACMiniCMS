@@ -12,6 +12,7 @@ matchers =
         , map ActivityRoute (s "activities" </> string)
         , map SubCouncilRoute (s "sub-council" </> string)
         , map FeedbackRoute (s "feedback")
+        , map StartEditSession (s "edit" </> string)
         ]
 
 
