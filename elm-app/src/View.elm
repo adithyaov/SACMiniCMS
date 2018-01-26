@@ -16,12 +16,12 @@ view model =
     case model.display of
         ViewMode ->
             div [ style [("min-width", "700px")] ]
-                [ page model ]
+                [ page ViewMode model ]
         EditMode ->
             div []
                 [ div [ class "fixed top-0 left-0 overflow-auto", style [("width", "calc(100% - 450px)"), ("height", "100%")] ] 
                     [ notificationBox (model.edit.alert)
-                    , page model ]
+                    , page EditMode model ]
                 , div [ class "fixed top-0 right-0 overflow-auto", style [("width", "450px"), ("height", "100%")] ]
                     [ editor model ] ]
 
@@ -31,26 +31,26 @@ notificationBox alert =
         [ div [ class "bold h5 caps" ] [ text "Notification box" ]
         , div [ class "mt1" ] [ text alert ] ]
 
-page : Model -> Html Msg
-page model =
+page : DisplayMode -> Model -> Html Msg
+page mode model =
     case model.route of
         Models.HomeRoute ->
-            Page.Home.view model.footer model.home
+            Page.Home.view mode model.footer model.home
 
         Models.MembersRoute ->
-            Page.Members.view model.footer model.members
+            Page.Members.view mode model.footer model.members
 
         Models.ActivityRoute activity ->
-            Page.Activity.view activity model.footer model.activities
+            Page.Activity.view mode activity model.footer model.activities
 
         Models.SubCouncilRoute council ->
-            Page.SubCouncil.view council model.footer model.council
+            Page.SubCouncil.view mode council model.footer model.council
 
         Models.FeedbackRoute ->
-            Page.Feedback.view model.footer model.feedback
+            Page.Feedback.view mode model.footer model.feedback
 
         Models.StartEditSession token ->
-            Page.Home.view model.footer model.home
+            Page.Home.view mode model.footer model.home
 
         Models.NotFoundRoute ->
             notFoundView

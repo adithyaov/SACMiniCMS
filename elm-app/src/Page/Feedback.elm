@@ -1,5 +1,5 @@
 module Page.Feedback exposing (..)
-import Models exposing (FooterModel, FeedbackModel, BasicResponseModel)
+import Models exposing (FooterModel, FeedbackModel, BasicResponseModel, DisplayMode)
 import Html exposing (Html, text, div, img, h2, p, cite, br, input, textarea, label)
 import Html.Attributes exposing (class, href, src, style, type_, placeholder, value, required)
 import Html.Events exposing (onClick, onInput)
@@ -10,8 +10,8 @@ import Msgs exposing (Msg)
 import Utils
 import Http
 
-view : WebData (FooterModel) -> FeedbackModel -> Html Msg
-view footer feedback = 
+view : DisplayMode -> WebData (FooterModel) -> FeedbackModel -> Html Msg
+view mode footer feedback = 
     div [ class "bg-white clearfix" ]
         [ div []
             [ Header.view
@@ -19,7 +19,7 @@ view footer feedback =
                 [ div [ class "h5 bold caps" ] [ text "Feedback" ]
                 , div [ class "red italic mb1" ] [ text "Please fill out all the fields*" ]
                 , displayForm feedback.response ]
-            , Footer.view footer ] ]
+            , Footer.view mode footer ] ]
 
 
 viewForm : Html Msg

@@ -1,5 +1,5 @@
 module Page.Members exposing (..)
-import Models exposing (MembersModel, Model, Member, FooterModel)
+import Models exposing (MembersModel, Model, Member, FooterModel, DisplayMode)
 import Html exposing (Html, text, div, img, h2, p, cite, br, ul, li)
 import Html.Attributes exposing (class, href, src, style)
 import Page.Header as Header
@@ -8,16 +8,16 @@ import RemoteData exposing (WebData)
 import Msgs exposing (Msg)
 import Utils
 
-view : WebData (FooterModel) -> WebData (MembersModel) -> Html Msg
-view footer response = 
+view : DisplayMode -> WebData (FooterModel) -> WebData (MembersModel) -> Html Msg
+view mode footer response = 
     div [ class "bg-white clearfix" ]
         [ div []
             [ Header.view
-            , mabeyResponse response
-            , Footer.view footer ] ]
+            , mabeyResponse mode response
+            , Footer.view mode footer ] ]
 
-mabeyResponse : WebData (MembersModel) -> Html Msg
-mabeyResponse response =
+mabeyResponse : DisplayMode -> WebData (MembersModel) -> Html Msg
+mabeyResponse mode response =
     case response of
         RemoteData.NotAsked ->
             div [ class "m3 p2 border" ] [ text "Not Requested" ]
@@ -26,20 +26,20 @@ mabeyResponse response =
             div [ class "m3 p2 border" ] [ text "Loading..." ]
 
         RemoteData.Success response ->
-            viewSuccess response
+            viewSuccess mode response
 
         RemoteData.Failure error ->
             div [ class "m3 p2 border" ] [ text ("[ERROR] -> " ++ (toString error)) ]
 
 
-viewSuccess : MembersModel -> Html Msg
-viewSuccess members = 
+viewSuccess : DisplayMode -> MembersModel -> Html Msg
+viewSuccess mode members = 
     div [] 
         [ div [ class "px4 py2 clearfix" ]
             [ div [ class "h5 caps bold mb1" ] [ text "Faculty Team" ]
-            , div [] (List.map Utils.cardFormat (List.filter (\member -> member.type_ == "faculty") members)) ]
+            , div [] (List.map (Utils.cardFormat mode) (List.filter (\member -> member.type_ == "faculty") members)) ]
         ,div [ class "px4 py2 clearfix" ]
             [ div [ class "h5 caps bold mb1" ] [ text "Student Team" ]
-            , div [] (List.map Utils.cardFormat (List.filter (\member -> member.type_ == "student") members)) ] ]
+            , div [] (List.map (Utils.cardFormat mode) (List.filter (\member -> member.type_ == "student") members)) ] ]
 
 

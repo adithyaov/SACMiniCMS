@@ -68,12 +68,15 @@ updateEdit msg model =
         case msg of
             Msgs.ChangeRoute route ->
                 ( changeEditRoute route model, Cmd.none )
+
             Msgs.OnFormPost post ->
                 ( model
                     |> setNewPost post editModel, Cmd.none )
+
             Msgs.OnFormMember member ->
                 ( model
                     |> setNewMember member editModel, Cmd.none )
+
             Msgs.OnFetchEditResponse response ->
                 ( model 
                     |> editResponse response,  Cmd.batch [ commandOn model.route, fetchFooterData ] )
@@ -85,6 +88,14 @@ updateEdit msg model =
             Msgs.SubmitStatic key value ->
                 ( model
                     |> changeAlertMsg "Loading..." editModel, staticCmd key value model )
+
+            Msgs.DeletePost key value ->
+                ( model
+                    |> changeAlertMsg "Loading..." editModel, deletePostCmd key value )
+
+            Msgs.DeleteMember key value ->
+                ( model
+                    |> changeAlertMsg "Loading..." editModel, deleteMemberCmd key value )
 
             Msgs.SubmitMemberForm ->
                 ( model
@@ -188,4 +199,4 @@ onResult httpResult model =
                 |> changeAlertMsg ("[ERROR] -> " ++ (toString e)) (model.edit)
         Ok r
             -> model
-                |> changeAlertMsg "Successfully Added/Modified :-)" (model.edit)
+                |> changeAlertMsg "Successfully Executed Query :-)" (model.edit)

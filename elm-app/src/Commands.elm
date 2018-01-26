@@ -240,3 +240,10 @@ saveStaticUrl = "http://localhost:1337/static/customUpdate"
 postCmd model = editorCmd (editorRequest postEncoder model.edit.newPost savePostUrl postDataDecoder "POST") Msgs.PostResponse
 memberCmd model = editorCmd (editorRequest memberEncoder model.edit.newMember saveMemberUrl memberDataDecoder "POST") Msgs.MemberResponse
 staticCmd key value model = editorCmd (editorRequest staticEncoder (key, value) saveStaticUrl basicResponseDecoder "POST") Msgs.StaticResponse
+
+deletePostUrl = "http://localhost:1337/post/customDelete"
+deleteMemberUrl = "http://localhost:1337/member/customDelete"
+
+deleteCmd targetUrl key value = editorCmd (editorRequest staticEncoder (key, value) targetUrl basicResponseDecoder "POST") Msgs.StaticResponse
+deletePostCmd = deleteCmd deletePostUrl
+deleteMemberCmd = deleteCmd deleteMemberUrl

@@ -26,6 +26,8 @@ type FeedbackMsgs
 
 type EditMsgs
     = ChangeRoute EditRoute
+    | DeletePost String String
+    | DeleteMember String String
     | OnFormPost Post
     | OnFormMember Member
     | SubmitPostForm

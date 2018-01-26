@@ -58,7 +58,7 @@ parseContent x =
         trimmed = List.map String.trim splitted
         filtered = List.filter (\b -> String.isEmpty b == False) trimmed 
     in         
-        trimmed
+        filtered
 
 
 revParsePosition : Float -> String
