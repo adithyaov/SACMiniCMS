@@ -41,7 +41,7 @@ viewSuccess mode model =
         , div Utils.customContainerAttributes
             [ div [ class "mt3" ]
             [ div [ class "clearfix" ] (Utils.viewPosts mode model.content) ]
-            , div [ class "py2" ]
-                [ div [ style [("background-color", "#f9f9f0")], class "p2 border-left border-black" ]
-                    [ div [ class "h3" ] [ text model.directorQuote ]
-                    , div [ class "clearfix" ] [ cite [ class "right h4" ] [ text model.directorName ] ] ] ] ] ]
+            , div [ class "mx-auto py3", style [("max-width", "1000px")] ]
+                [ div [ style [("background-color", "#f9f9f0")], class "p2" ]
+                    [ div [ class "h4 gray bold" ] [ text model.directorQuote ]
+                    , div [ class "clearfix" ] [ cite [ class "right h4 gray" ] [ text model.directorName ] ] ] ] ] ]

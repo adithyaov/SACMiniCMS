@@ -24,13 +24,13 @@ cardFormat mode member =
                     div [] []
     in
         div [ style [("width", "200px")], class "left border border-gray clearfix mr2 mb1 mt1" ]
-            [ div [ style [("height", "140px"), ("background-image", "url(" ++ member.image ++ ")")], class "mx-auto bg-gray bg-cover bg-center" ] [ (deleteBtn) ]
-            , div [ class "bg-white mt1 px2 overflow-auto" ]
+            [ div [ style [("height", "140px"), ("background-image", "url(" ++ member.image ++ ")")], class "mx-auto bg-gray bg-cover bg-top" ] [ (deleteBtn) ]
+            , div [ class "bg-white mt1 px2 overflow-scroll" ]
                 [ ul [ class "list-reset" ]
-                    [ li [] [ text member.name ]
-                    , li [] [ text member.position ]
-                    , li [] [ text member.email ]
-                    , li [] [ text member.contact ] ] ] ]
+                    [ li [ class "nowrap" ] [ text member.name ]
+                    , li [ class "nowrap" ] [ text member.position ]
+                    , li [ class "nowrap" ] [ text member.email ]
+                    , li [ class "nowrap" ] [ text member.contact ] ] ] ]
 
 viewPosts : DisplayMode -> List Post -> List (Html Msg)
 viewPosts mode posts = 

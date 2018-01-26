@@ -10,7 +10,7 @@ import Msgs exposing (Msg)
 
 view : DisplayMode -> WebData (FooterModel) -> Html Msg
 view mode response =
-    div [ class "clearfix py3 white bg-black mt4" ]
+    div [ class "clearfix py3 white bg-black mt2" ]
         [ div Utils.customContainerAttributes
             [ (mabeyResponse mode response)
             , div [ class "right yellow" ] 

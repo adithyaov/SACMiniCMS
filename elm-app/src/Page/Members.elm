@@ -36,10 +36,10 @@ viewSuccess : DisplayMode -> MembersModel -> Html Msg
 viewSuccess mode members = 
     div [] 
         [ div [ class "px4 py2 clearfix" ]
-            [ div [ class "h5 caps bold mb1" ] [ text "Faculty Team" ]
+            [ div [ class "h5 caps mb1" ] [ text "Faculty Team" ]
             , div [] (List.map (Utils.cardFormat mode) (List.filter (\member -> member.type_ == "faculty") members)) ]
         ,div [ class "px4 py2 clearfix" ]
-            [ div [ class "h5 caps bold mb1" ] [ text "Student Team" ]
+            [ div [ class "h5 caps mb1" ] [ text "Student Team" ]
             , div [] (List.map (Utils.cardFormat mode) (List.filter (\member -> member.type_ == "student") members)) ] ]
 
 
